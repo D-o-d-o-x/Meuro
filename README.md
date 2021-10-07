@@ -17,7 +17,7 @@ Converts the given amount of euros to meuros for the given date. (wholeCents mea
 #### meuroToEuro(meur, date=None, wholeCents=True)
 Converts the given amount of meuros to euros for the given date. (wholeCents means it rounds to two decimal places)
 #### liveValue(eur, interval=10)
-Print the current amount of meuros for the given amunt of euros every interval-seconds. Comes in handy when you want to watch your live saving slowly fade away thanks to inflation.
+Print the current amount of meuros for the given amunt of euros every interval-seconds. Comes in handy when you want to watch your life savings slowly fade away thanks to inflation.
 ##### When the date is set to None the current date is used. Otherwise a datetime-object is expected
 ## Caveats
 The ecb only gives an estimate for the inflation of the last month and no data for the current month.  
