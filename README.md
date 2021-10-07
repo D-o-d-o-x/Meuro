@@ -23,4 +23,6 @@ Print the current amount of meuros for the given amunt of euros every interval-s
 The ecb only gives an estimate for the inflation of the last month and no data for the current month.  
 This libary just uses this estimate and assumes a yearly-inflation-rate of the current month (and all others months without data) of 2% (which is the stated goal-inflation-rate of the ecb).
 ## Future Plans
-It would be cool to have a stable-coin on the ethereum-network, that tracks to the value of a meuro. I'm way to lazy to write that though...
+It would be cool to have a stable-coin on the ethereum-network, that tracks to the value of a meuro. I'm way to lazy to write that though...  
+## Some free wisdom for you
+"Remember! Reality's an illusion, the universe is a hologram, buy gold! Byeeee!" - Bill Chiper, July 12th 2013
