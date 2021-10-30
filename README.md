@@ -24,7 +24,7 @@ Examples:
 #### ./meuro.py I want to know how much 2000€ from 11.11.2011 are in meuro
 #### ./meuro.py 3.14E 01.02.2003 12:34
 #### ./meuro.py How much meuro are 12 euro from January 2010
-### Python-API
+## Python-API
 You can also import this libary from another python file
 ##### The provided functions are:
 #### exchangeRate(date=None)
@@ -34,9 +34,9 @@ Converts the given amount of euros to meuros for the given date. (wholeCents mea
 #### meuroToEuro(meur, date=None, wholeCents=True)
 Converts the given amount of meuros to euros for the given date. (wholeCents means it rounds to two decimal places)
 #### liveValue(eur, interval=10)
-Print the current amount of meuros for the given amunt of euros every interval-seconds. Comes in handy when you want to watch your life savings slowly fade away thanks to inflation.
+Print the current amount of meuros for the given amount of euros every interval-seconds. Comes in handy when you want to watch your life savings slowly fade away thanks to inflation.
 ##### When the date is set to None the current date is used. Otherwise a datetime-object is expected
-## Cache
+### Cache
 Because we dont want to annoy the ecb, we cache their data while we are running and for up to an hour on disc.
 #### _loadYearsTable(maxCacheSeconds=3600)
 Will reload the cache if it is older than maxCacheSeconds
