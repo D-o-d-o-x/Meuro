@@ -80,7 +80,7 @@ def _extractDate(s):
 
 def cliInterface():
     import sys, re
-    arg = " ".join(sys.argv[1:])
+    arg = " ".join(sys.argv[1:]).replace(',','')
     reFromEur = re.compile(r'(\d+(.\d\d)?)\W?(€|e|E)')
     reFromMeur = re.compile(r'(\d+(.\d\d)?)\W?(μ|m|M)')
     if (m := reFromEur.search(arg))!=None:
