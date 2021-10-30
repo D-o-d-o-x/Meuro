@@ -36,9 +36,13 @@ Converts the given amount of meuros to euros for the given date. (wholeCents mea
 #### liveValue(eur, interval=10)
 Print the current amount of meuros for the given amunt of euros every interval-seconds. Comes in handy when you want to watch your life savings slowly fade away thanks to inflation.
 ##### When the date is set to None the current date is used. Otherwise a datetime-object is expected
+## Cache
+Because we dont want to annoy the ecb, we cache their data while we are running and for up to an hour on disc.
+#### _loadYearsTable(maxCacheSeconds=3600)
+Will reload the cache if it is older than maxCacheSeconds
 ## Caveats
 The ecb only gives an estimate for the inflation of the last month and no data for the current month.  
-This libary just uses this estimate and assumes a yearly-inflation-rate of the current month (and all others months without data) of 2% (which is the stated goal-inflation-rate of the ecb).
+This libary just uses this estimate and assumes a yearly-inflation-rate of the current month (and all others months without data) of 2% (which is the stated goal-inflation-rate of the ecb).  
 ## Future Plans
 It would be cool to have a stable-coin on the ethereum-network, that tracks to the value of a meuro. I'm way to lazy to write that though...  
 ## Some free wisdom for you
