@@ -89,14 +89,14 @@ def cliInterface():
         eur = float(eurS)
         meur = euroToMeuro(eur, date)
         print('Exchange rate for '+date.strftime("%d.%m.%Y at %H:%M")+':')
-        print(str(eur)+'€ = '+str(meur)+'µ')
+        print(f'{eur:.2f}€ = {meur:.2f}µ')
     elif (m:= reFromMeur.search(arg))!=None:
         meurS = m.groups()[0]
         date = _extractDate(arg.replace(meurS, '-'))
         meur = float(meurS)
         eur = euroToMeuro(meur, date)
         print('Exchange rate for '+date.strftime("%d.%m.%Y at %H:%M")+':')
-        print(str(meur)+'µ = '+str(eur)+'€')
+        print(f'{meur:.2f}µ = {eur:.2f}€')
     else:
         print('[!] Unable to parse input')
 
