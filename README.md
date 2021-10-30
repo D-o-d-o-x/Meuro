@@ -40,7 +40,7 @@ Print the current amount of meuros for the given amount of euros every interval-
 ### Cache
 Because we dont want to annoy the ecb, we cache their data while we are running and for up to an hour on disc.
 #### reload(maxCacheSeconds=3600)
-Will reload the cache if it is older than maxCacheSeconds
+Will reload the cache if it is older than maxCacheSeconds. Gets called once in the background the first time you call any other function.
 ## Caveats
 The ecb only gives an estimate for the inflation of the last month and no data for the current month.  
 This libary just uses this estimate and assumes a yearly-inflation-rate of the current month (and all others months without data) of 2% (which is the stated goal-inflation-rate of the ecb).  
