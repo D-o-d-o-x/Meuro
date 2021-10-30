@@ -39,7 +39,7 @@ Print the current amount of meuros for the given amount of euros every interval-
 ##### When the date is set to None the current date is used. Otherwise a datetime-object is expected
 ### Cache
 Because we dont want to annoy the ecb, we cache their data while we are running and for up to an hour on disc.
-#### _loadYearsTable(maxCacheSeconds=3600)
+#### reload(maxCacheSeconds=3600)
 Will reload the cache if it is older than maxCacheSeconds
 ## Caveats
 The ecb only gives an estimate for the inflation of the last month and no data for the current month.  
