@@ -12,13 +12,15 @@ What you find in this repo is a small python-libary that connects to the ecb to 
 ## Usage
 You probably want to use this tool using the cli-interface which tries to understand requests in human language.  
 To reference the currencies use €, eur, euro, e, E, or µ, meu, meuro, m, M;  
+Currencies should be an integer or have 2 digits after the point (.).  
 Dates should always be dd.mm.YYYY or dd.mm.yy  
 If no date is supplied (or understood) the current date is used.  
 Examples:
 #### ./meuro.py What is 200 eur in meuro
-#### ./meuro.py 200 meur at 12.12.2012
-#### ./meuro.py 200€ 10.10.2010
-#### ./meuro.py I want to know how much 200€ from 11.11.2011 are in meuro.
+#### ./meuro.py 120.50 meur at 12.12.2012
+#### ./meuro.py 50,000€ 10.10.2010
+#### ./meuro.py I want to know how much 2000€ from 11.11.2011 are in meuro.
+#### ./meuro.py 3.14E 01.02.2003 12:34
 ### Python-API
 You can also import this libary from another python file
 ##### The provided functions are:
