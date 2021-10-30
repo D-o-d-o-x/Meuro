@@ -107,14 +107,14 @@ def cliInterface():
     reFromMeur = re.compile(r'(\d+(.\d\d)?)\W?(μ|m|M)')
     if (m := reFromEur.search(arg))!=None:
         eurS = m.groups()[0]
-        date = _extractDate(arg.replace(eurS, '-'))
+        date = _extractDate(arg[:m.span()[0]] + '-' + arg[m.span()[1]:])
         eur = float(eurS)
         meur = euroToMeuro(eur, date)
         print('Exchange rate for '+date.strftime("%d.%m.%Y at %H:%M")+':')
         print(f'{eur:.2f}€ = {meur:.2f}µ')
     elif (m:= reFromMeur.search(arg))!=None:
         meurS = m.groups()[0]
-        date = _extractDate(arg.replace(meurS, '-'))
+        date = _extractDate(arg[:m.span()[0]] + '-' + arg[m.span()[1]:])
         meur = float(meurS)
         eur = meuroToEuro(meur, date)
         print('Exchange rate for '+date.strftime("%d.%m.%Y at %H:%M")+':')
