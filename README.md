@@ -21,8 +21,9 @@ Examples:
 #### ./meuro.py What is 200 eur in meuro
 #### ./meuro.py 120.50 meur at 12.12.2012
 #### ./meuro.py 50,000€ 10.10.2010
-#### ./meuro.py I want to know how much 2000€ from 11.11.2011 are in meuro.
+#### ./meuro.py I want to know how much 2000€ from 11.11.2011 are in meuro
 #### ./meuro.py 3.14E 01.02.2003 12:34
+#### ./meuro.py How much meuro are 12 euro
 ### Python-API
 You can also import this libary from another python file
 ##### The provided functions are:
