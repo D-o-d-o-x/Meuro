@@ -1,6 +1,6 @@
 # Meuro
 
-![Logo Missing](./Meuro.svg)
+![Logo Missing](./icon_meuro.svg)
 
 Prices in euros from different times can not be compared without taking inflation into account.  
 This also negatively impacts peoples abilities to gauge their own financial prosperity because what they conceive as a raise might not even cover they loss in purchase-power due to inflation.  
