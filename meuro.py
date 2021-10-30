@@ -94,7 +94,7 @@ def cliInterface():
         meurS = m.groups()[0]
         date = _extractDate(arg.replace(meurS, '-'))
         meur = float(meurS)
-        eur = euroToMeuro(meur, date)
+        eur = meuroToEuro(meur, date)
         print('Exchange rate for '+date.strftime("%d.%m.%Y at %H:%M")+':')
         print(f'{meur:.2f}µ = {eur:.2f}€')
     else:
