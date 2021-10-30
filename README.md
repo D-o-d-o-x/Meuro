@@ -15,10 +15,10 @@ To reference the currencies use €, eur, euro, e, E, or µ, meu, meuro, m, M;
 Dates should always be dd.mm.YYYY or dd.mm.yy  
 If no date is supplied (or understood) the current date is used.  
 Examples:
-#### ./meuro What is 200 eur in meuro
-#### ./meuro 200 meur at 12.12.2012
-#### ./meuro 200€ 10.10.2010
-#### ./meuro I want to know how much 200€ from 11.11.2011 are in meuro.
+#### ./meuro.py What is 200 eur in meuro
+#### ./meuro.py 200 meur at 12.12.2012
+#### ./meuro.py 200€ 10.10.2010
+#### ./meuro.py I want to know how much 200€ from 11.11.2011 are in meuro.
 ### Python-API
 You can also import this libary from another python file
 ##### The provided functions are:
