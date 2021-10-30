@@ -72,8 +72,9 @@ def reload(maxCacheSeconds=3600):
         with open('cache.json', 'r') as f:
             cacheUpdate, cacheYears = json.loads(f.read())
         if (datetime.now() - dparser.isoparse(cacheUpdate)).total_seconds() < maxCacheSeconds:
-            # JSON does not allow integers as keys; so we convert them back here...
+            # JSON does not allow integers as keys; so we convert them back here
             cacheYears = {int(y):{int(m):float(n) for m,n in ms.items()} for y,ms in cacheYears.items()}
+            # For every month we dont have data for, we assume the ECB nailed their 2%-target
             _years = defaultdict(lambda: {m:1 + 0.02/12 for m in range(1,13)}, cacheYears)
             return
     _years = _loadYearsTableWeb()
@@ -91,11 +92,6 @@ def _loadYearsTableWeb():
         inflation = float(vals[1])
         years[year][month] = 1 + (inflation/100)/12
 
-    for year in years:
-        months = years[year]
-        for month in range(1,13):
-            if month not in months:
-                years[year][month] = 1 + 0.02/12 # Lets say the ECB archives their target
     with open('cache.json', 'w') as f:
         f.write(json.dumps([datetime.now().isoformat(),years]))
     return years
