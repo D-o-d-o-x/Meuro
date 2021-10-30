@@ -8,14 +8,16 @@ from dateutil.parser._parser import ParserError as DateParserError
 _years = None
 
 def _loadYearsTable(maxCacheSeconds=3600):
+    global _years
     if os.path.isfile('cache.json'):
         with open('cache.json', 'r') as f:
             cacheUpdate, cacheYears = json.loads(f.read())
         if (datetime.now() - dparser.isoparse(cacheUpdate)).total_seconds() < maxCacheSeconds:
             # JSON does not allow integers as keys; so we convert them back here...
             cacheYears = {int(y):{int(m):float(n) for m,n in ms.items()} for y,ms in cacheYears.items()}
-            return cacheYears
-    return _loadYearsTableWeb()
+            _years = cacheYears
+            return
+    _years = _loadYearsTableWeb()
 
 def _loadYearsTableWeb():
     print('[i] Fetching new data from ECB-Servers...')
@@ -47,7 +49,7 @@ def _loadYearsTableWeb():
 def exchangeRate(date=None):
     global _years
     if _years==None:
-        _years = _loadYearsTable()
+        _loadYearsTable()
     if date==None:
         date = datetime.now()
     month, year = date.month, date.year
