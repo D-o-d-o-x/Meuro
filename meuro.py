@@ -4,6 +4,7 @@ from datetime import datetime
 from dateutil import relativedelta
 from dateutil import parser as dparser
 from dateutil.parser._parser import ParserError as DateParserError
+from collections import defaultdict
 
 _years = None
 
@@ -15,7 +16,7 @@ def _loadYearsTable(maxCacheSeconds=3600):
         if (datetime.now() - dparser.isoparse(cacheUpdate)).total_seconds() < maxCacheSeconds:
             # JSON does not allow integers as keys; so we convert them back here...
             cacheYears = {int(y):{int(m):float(n) for m,n in ms.items()} for y,ms in cacheYears.items()}
-            _years = cacheYears
+            _years = defaultdict(lambda: {m:1 + 0.02/12 for m in range(1,13)}, cacheYears)
             return
     _years = _loadYearsTableWeb()
 
@@ -24,14 +25,12 @@ def _loadYearsTableWeb():
     url = 'https://sdw.ecb.europa.eu/quickviewexport.do?SERIES_KEY=122.ICP.M.U2.N.000000.4.ANR&type=csv'
     resp = requests.get(url)
     lines = resp.text.split('\n')[6:]
-    years = {} # Will later contain the monthly factor of inflation (~1.0016667) for every month
+    years = defaultdict(lambda: {m:1 + 0.02/12 for m in range(1,13)})
     for line in lines:
         vals = line.split(',')
         year = int(vals[0][:4])
         month = datetime.strptime(vals[0][4:],'%b').month
         inflation = float(vals[1])
-        if not year in years:
-            years[year] = {}
         years[year][month] = 1 + (inflation/100)/12
 
     for year in years:
