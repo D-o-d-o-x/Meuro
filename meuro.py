@@ -2,6 +2,8 @@
 import requests
 from datetime import datetime
 from dateutil import relativedelta
+from dateutil import parser as dparser
+from dateutil.parser._parser import ParserError as DateParserError
 
 # Ugly code thats outside of any function
 url = 'https://sdw.ecb.europa.eu/quickviewexport.do?SERIES_KEY=122.ICP.M.U2.N.000000.4.ANR&type=csv'
@@ -55,12 +57,12 @@ def exchangeRate(date=None):
 # Converts the given amount of euros to meuros for the given date. (wholeCents means it rounds to two decimal places)
 # date should be either a datetime-object or None (= current date)
 def euroToMeuro(eur,date=None,wholeCents=True):
-    return round(eur * factorForDate(date),[64,2][wholeCents])
+    return round(eur * exchangeRate(date),[64,2][wholeCents])
 
 # Converts the given amount of meuros to euros for the given date. (wholeCents means it rounds to two decimal places)
 # date should be either a datetime-object or None (= current date)
 def meuroToEuro(meur,date=None,wholeCents=True):
-    return round(meur / factorForDate(date),[64,2][wholeCents])
+    return round(meur / exchangeRate(date),[64,2][wholeCents])
 
 # Print the current amount of meuros for the given amunt of euros every <interval>-seconds.
 # Comes in handy when you want to watch your life savings slowly fade away thanks to inflation.
@@ -69,3 +71,34 @@ def liveValue(eur,interval=10):
     while True:
         print(str(eur*exchangeRate())+'µ')
         time.sleep(interval)
+
+def _extractDate(s):
+    try:
+        return dparser.parse(s, fuzzy=True, dayfirst=True)
+    except DateParserError:
+        return datetime.now()
+
+def cliInterface():
+    import sys, re
+    arg = " ".join(sys.argv[1:])
+    reFromEur = re.compile(r'(\d+(.\d\d)?)\W?(€|e|E)')
+    reFromMeur = re.compile(r'(\d+(.\d\d)?)\W?(μ|m|M)')
+    if (m := reFromEur.search(arg))!=None:
+        eurS = m.groups()[0]
+        date = _extractDate(arg.replace(eurS, '-'))
+        eur = float(eurS)
+        meur = euroToMeuro(eur, date)
+        print('Exchange rate for '+date.strftime("%d.%m.%Y at %H:%M")+':')
+        print(str(eur)+'€ = '+str(meur)+'µ')
+    elif (m:= reFromMeur.search(arg))!=None:
+        meurS = m.groups()[0]
+        date = _extractDate(arg.replace(meurS, '-'))
+        meur = float(meurS)
+        eur = euroToMeuro(meur, date)
+        print('Exchange rate for '+date.strftime("%d.%m.%Y at %H:%M")+':')
+        print(str(meur)+'µ = '+str(eur)+'€')
+    else:
+        print('[!] Unable to parse input')
+
+if __name__=='__main__':
+    cliInterface()
