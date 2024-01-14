@@ -81,8 +81,10 @@ def reload(maxCacheSeconds=3600):
 
 def _loadYearsTableWeb():
     print('[i] Fetching new data from ECB-Servers...')
-    url = 'https://sdw.ecb.europa.eu/quickviewexport.do?SERIES_KEY=122.ICP.M.U2.N.000000.4.ANR&type=csv'
-    resp = requests.get(url)
+    #url = 'https://sdw.ecb.europa.eu/quickviewexport.do?SERIES_KEY=122.ICP.M.U2.N.000000.4.ANR&type=csv'
+    #resp = requests.get(url)
+    url = 'https://data.ecb.europa.eu/download-api/csv/wide'
+    resp = requests.post(url, {'serieskeys': ['ICP.M.U2.N.000000.4.ANR']})
     lines = resp.text.split('\n')[6:]
     years = defaultdict(lambda: {m:1 + 0.02/12 for m in range(1,13)})
     for line in lines:
